@@ -1,5 +1,5 @@
 {
-  "name": "@google/gemini-cli-core",
+  "name": "@gemini-cli-desktop/core",
   "version": "0.1.9",
   "description": "Gemini CLI Core",
   "repository": {
@@ -8,6 +8,12 @@
   },
   "type": "module",
   "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./cjs-wrapper.cjs"
+    }
+  },
   "scripts": {
     "build": "node ../../scripts/build_package.js",
     "lint": "eslint . --ext .ts,.tsx",
@@ -17,7 +23,8 @@
     "typecheck": "tsc --noEmit"
   },
   "files": [
-    "dist"
+    "dist",
+    "cjs-wrapper.cjs"
   ],
   "dependencies": {
     "@google/genai": "^1.8.0",

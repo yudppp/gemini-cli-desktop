@@ -20,7 +20,6 @@ import { Config } from '../config/config.js';
 import { Turn } from './turn.js';
 import { getCoreSystemPrompt } from './prompts.js';
 import { DEFAULT_GEMINI_FLASH_MODEL } from '../config/models.js';
-import { FileDiscoveryService } from '../services/fileDiscoveryService.js';
 import { setSimulate429 } from '../utils/testUtils.js';
 import { tokenLimit } from './tokenLimits.js';
 
@@ -153,7 +152,6 @@ describe('Gemini Client (client.ts)', () => {
       getFunctionDeclarations: vi.fn().mockReturnValue([]),
       getTool: vi.fn().mockReturnValue(null),
     };
-    const fileService = new FileDiscoveryService('/test/dir');
     const MockedConfig = vi.mocked(Config, true);
     const contentGeneratorConfig = {
       model: 'test-model',
@@ -177,7 +175,6 @@ describe('Gemini Client (client.ts)', () => {
         getSessionId: vi.fn().mockReturnValue('test-session-id'),
         getProxy: vi.fn().mockReturnValue(undefined),
         getWorkingDir: vi.fn().mockReturnValue('/test/dir'),
-        getFileService: vi.fn().mockReturnValue(fileService),
       };
       return mock as unknown as Config;
     });
@@ -355,7 +352,7 @@ describe('Gemini Client (client.ts)', () => {
         config: {
           abortSignal,
           systemInstruction: getCoreSystemPrompt(''),
-          temperature: 0,
+          temperature: 0.6,
           topP: 1,
           responseSchema: schema,
           responseMimeType: 'application/json',

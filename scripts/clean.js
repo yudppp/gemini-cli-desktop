@@ -27,13 +27,7 @@ const root = join(__dirname, '..');
 
 // remove npm install/build artifacts
 rmSync(join(root, 'node_modules'), { recursive: true, force: true });
-rmSync(join(root, 'bundle'), { recursive: true, force: true });
-rmSync(join(root, 'packages/cli/src/generated/'), {
-  recursive: true,
-  force: true,
-});
 const RMRF_OPTIONS = { recursive: true, force: true };
-rmSync(join(root, 'bundle'), RMRF_OPTIONS);
 // Dynamically clean dist directories in all workspaces
 const rootPackageJson = JSON.parse(
   readFileSync(join(root, 'package.json'), 'utf-8'),

@@ -1,0 +1,193 @@
+/**
+ * @license
+ * Copyright 2025 yudppp
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+.markdown-content {
+  line-height: 1.6;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  margin: 16px 0 8px 0;
+  font-weight: 500;
+}
+
+.markdown-content h1 {
+  font-size: var(--md-sys-typescale-headline-large-size);
+  line-height: var(--md-sys-typescale-headline-large-line-height);
+  color: var(--md-sys-color-on-surface);
+}
+
+.markdown-content h2 {
+  font-size: var(--md-sys-typescale-headline-medium-size);
+  line-height: var(--md-sys-typescale-headline-medium-line-height);
+  color: var(--md-sys-color-on-surface);
+}
+
+.markdown-content h3 {
+  font-size: var(--md-sys-typescale-headline-small-size);
+  line-height: var(--md-sys-typescale-headline-small-line-height);
+  color: var(--md-sys-color-on-surface);
+}
+
+.markdown-content p {
+  margin: 8px 0;
+}
+
+.markdown-content .code-block {
+  background-color: var(--md-sys-color-surface-container-highest);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+  overflow-x: auto;
+  font-family: 'Roboto Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: var(--md-sys-typescale-body-medium-size);
+}
+
+.markdown-content .inline-code {
+  background-color: var(--md-sys-color-surface-container-highest);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Roboto Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  color: var(--md-sys-color-primary);
+}
+
+.markdown-content .list-item {
+  margin: 4px 0;
+  margin-left: 24px;
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Tables with Material Design styling */
+.markdown-content .table-wrapper {
+  overflow-x: auto;
+  margin: 16px 0;
+  border-radius: 12px;
+  background-color: var(--md-sys-color-surface-container);
+}
+
+.markdown-content .markdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--md-sys-typescale-body-medium-size);
+}
+
+.markdown-content .markdown-table th,
+.markdown-content .markdown-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.markdown-content .markdown-table th {
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  font-weight: 500;
+  font-size: var(--md-sys-typescale-label-large-size);
+}
+
+.markdown-content .markdown-table td {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.markdown-content .markdown-table tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-content .markdown-table tr:hover td {
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+
+/* Links */
+.markdown-content .markdown-link {
+  color: var(--md-sys-color-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.markdown-content .markdown-link:hover {
+  color: var(--md-sys-color-primary-container);
+  text-decoration: underline;
+}
+
+/* Blockquotes */
+.markdown-content .markdown-blockquote {
+  border-left: 4px solid var(--md-sys-color-primary);
+  margin: 16px 0;
+  padding: 8px 16px;
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface-variant);
+  font-style: italic;
+}
+
+/* Lists */
+.markdown-content .markdown-list {
+  margin: 8px 0;
+  padding-left: 24px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.markdown-content .markdown-list li {
+  margin: 4px 0;
+  line-height: 1.6;
+}
+
+.markdown-content .markdown-list-ordered {
+  list-style-type: decimal;
+}
+
+/* Horizontal rule */
+.markdown-content .markdown-hr {
+  border: none;
+  height: 1px;
+  background-color: var(--md-sys-color-outline-variant);
+  margin: 24px 0;
+}
+
+/* Paragraphs */
+.markdown-content .markdown-paragraph {
+  margin: 12px 0;
+  color: var(--md-sys-color-on-surface);
+  line-height: 1.6;
+}
+
+/* Code blocks improvements */
+.markdown-content pre {
+  margin: 0;
+  padding: 0;
+}
+
+.markdown-content .code-block pre {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* Improve inline code visibility */
+.markdown-content code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Strong/Bold text */
+.markdown-content strong {
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Emphasis/Italic text */
+.markdown-content em {
+  font-style: italic;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Nested lists */
+.markdown-content .markdown-list .markdown-list {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}

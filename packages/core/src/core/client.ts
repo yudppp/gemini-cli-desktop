@@ -23,7 +23,6 @@ import {
 } from './turn.js';
 import { Config } from '../config/config.js';
 import { getCoreSystemPrompt, getCompressionPrompt } from './prompts.js';
-import { ReadManyFilesTool } from '../tools/read-many-files.js';
 import { getResponseText } from '../utils/generateContentResponseUtilities.js';
 import { checkNextSpeaker } from '../utils/nextSpeakerChecker.js';
 import { reportError } from '../utils/errorReporting.js';
@@ -83,7 +82,7 @@ export class GeminiClient {
   private contentGenerator?: ContentGenerator;
   private embeddingModel: string;
   private generateContentConfig: GenerateContentConfig = {
-    temperature: 0,
+    temperature: 0.6,
     topP: 1,
   };
   private readonly MAX_TURNS = 100;
@@ -153,9 +152,7 @@ export class GeminiClient {
       day: 'numeric',
     });
     const platform = process.platform;
-    const folderStructure = await getFolderStructure(cwd, {
-      fileService: this.config.getFileService(),
-    });
+    const folderStructure = await getFolderStructure(cwd);
     const context = `
   This is the Gemini CLI. We are setting up the context for our chat.
   Today's date is ${today}.
@@ -165,45 +162,8 @@ export class GeminiClient {
           `.trim();
 
     const initialParts: Part[] = [{ text: context }];
-    const toolRegistry = await this.config.getToolRegistry();
 
-    // Add full file context if the flag is set
-    if (this.config.getFullContext()) {
-      try {
-        const readManyFilesTool = toolRegistry.getTool(
-          'read_many_files',
-        ) as ReadManyFilesTool;
-        if (readManyFilesTool) {
-          // Read all files in the target directory
-          const result = await readManyFilesTool.execute(
-            {
-              paths: ['**/*'], // Read everything recursively
-              useDefaultExcludes: true, // Use default excludes
-            },
-            AbortSignal.timeout(30000),
-          );
-          if (result.llmContent) {
-            initialParts.push({
-              text: `\n--- Full File Context ---\n${result.llmContent}`,
-            });
-          } else {
-            console.warn(
-              'Full context requested, but read_many_files returned no content.',
-            );
-          }
-        } else {
-          console.warn(
-            'Full context requested, but read_many_files tool not found.',
-          );
-        }
-      } catch (error) {
-        // Not using reportError here as it's a startup/config phase, not a chat/generation phase error.
-        console.error('Error reading full file context:', error);
-        initialParts.push({
-          text: '\n--- Error reading full file context ---',
-        });
-      }
-    }
+    // Full file context feature has been removed since file operation tools are not available
 
     return initialParts;
   }

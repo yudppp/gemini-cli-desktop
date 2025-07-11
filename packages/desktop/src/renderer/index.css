@@ -1,0 +1,138 @@
+@import '@material/web/typography/md-typescale-styles.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Material Design 3 Color System - Dark Theme (Gemini exact) */
+  --md-sys-color-primary: #a8c7fa;
+  --md-sys-color-on-primary: #062e6f;
+  --md-sys-color-primary-container: #004a77;
+  --md-sys-color-on-primary-container: #d3e3fd;
+
+  --md-sys-color-secondary: #7fcfff;
+  --md-sys-color-on-secondary: #035;
+  --md-sys-color-secondary-container: #004a77;
+  --md-sys-color-on-secondary-container: #c2e7ff;
+
+  --md-sys-color-tertiary: #6dd58c;
+  --md-sys-color-on-tertiary: #0a3818;
+  --md-sys-color-tertiary-container: #0f5223;
+  --md-sys-color-on-tertiary-container: #c4eed0;
+
+  --md-sys-color-error: #f2b8b5;
+  --md-sys-color-on-error: #601410;
+  --md-sys-color-error-container: #601410;
+  --md-sys-color-on-error-container: #f9dedc;
+
+  --md-sys-color-background: #131314;
+  --md-sys-color-on-background: #e3e3e3;
+  --md-sys-color-surface: #1b1c1d;
+  --md-sys-color-on-surface: #fff;
+  --md-sys-color-surface-variant: #474747;
+  --md-sys-color-on-surface-variant: #a2a9b0;
+
+  --md-sys-color-outline: #9a9b9c;
+  --md-sys-color-outline-variant: #4a5050;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #e3e3e3;
+  --md-sys-color-inverse-on-surface: #303030;
+  --md-sys-color-inverse-primary: #0b57d0;
+
+  /* Surface tones (Gemini exact) */
+  --md-sys-color-surface-dim: #131314;
+  --md-sys-color-surface-bright: #424548;
+  --md-sys-color-surface-container-lowest: #1b1c1d;
+  --md-sys-color-surface-container-low: #262627;
+  --md-sys-color-surface-container: #282a2c;
+  --md-sys-color-surface-container-high: #333537;
+  --md-sys-color-surface-container-highest: #3d3f42;
+
+  /* Custom properties */
+  --header-height: 64px;
+  --sidebar-width: 280px;
+}
+
+[data-theme='light'] {
+  /* Material Design 3 Color System - Light Theme - Gemini Style */
+  --md-sys-color-primary: #1a73e8;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #d3e3fd;
+  --md-sys-color-on-primary-container: #001d35;
+
+  --md-sys-color-secondary: #5f6368;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #e8eaed;
+  --md-sys-color-on-secondary-container: #202124;
+
+  --md-sys-color-tertiary: #6e5676;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #f8d8ff;
+  --md-sys-color-on-tertiary-container: #271430;
+
+  --md-sys-color-error: #d93025;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #fce8e6;
+  --md-sys-color-on-error-container: #5f0000;
+
+  --md-sys-color-background: #f8fbff;
+  --md-sys-color-on-background: #001d35;
+  --md-sys-color-surface: #f8fbff;
+  --md-sys-color-on-surface: #001d35;
+  --md-sys-color-surface-variant: #e8f0fe;
+  --md-sys-color-on-surface-variant: #5f6368;
+
+  --md-sys-color-outline: #c2d9f0;
+  --md-sys-color-outline-variant: #dae2ed;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #2f3033;
+  --md-sys-color-inverse-on-surface: #f1f0f4;
+  --md-sys-color-inverse-primary: #8ab4f8;
+
+  /* Surface tones */
+  --md-sys-color-surface-dim: #e8f0fe;
+  --md-sys-color-surface-bright: #ffffff;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f8fbff;
+  --md-sys-color-surface-container: #e8f0fe;
+  --md-sys-color-surface-container-high: #dae2ed;
+  --md-sys-color-surface-container-highest: #c2d9f0;
+}
+
+body {
+  margin: 0;
+  font-family: var(--md-sys-typescale-body-large-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--md-sys-color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--md-sys-color-outline-variant);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-sys-color-outline);
+}

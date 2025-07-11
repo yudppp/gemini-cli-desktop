@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1">
+  <defs>
+    <!-- Linear gradient for the shape -->
+    <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient">
+      <stop stop-color="#4796E3" offset="0%"/>
+      <stop stop-color="#8A78CA" offset="66%"/>
+      <stop stop-color="#C6667B" offset="100%"/>
+    </linearGradient>
+    
+    <!-- Subtle shadow for depth -->
+    <filter id="shapeShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="8" stdDeviation="12" flood-opacity="0.2"/>
+    </filter>
+    
+    <!-- Inner shadow for white background -->
+    <filter id="innerShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feOffset in="blur" dx="0" dy="4" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.1"/>
+      <feComposite in2="offsetBlur" operator="out"/>
+      <feComposite in2="SourceAlpha" operator="in"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode/>
+      </feMerge>
+    </filter>
+    
+    <!-- Inner shadow for shape -->
+    <filter id="shapeInnerShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur"/>
+      <feOffset in="blur" dx="0" dy="10" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.25"/>
+      <feComposite in2="offsetBlur" operator="out"/>
+      <feComposite in2="SourceAlpha" operator="in" result="innerShadow"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="innerShadow"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- White background with macOS style rounded corners and padding -->
+  <!-- 80% of total size (820px) with 10% padding on each side (102px) -->
+  <rect x="102" y="102" width="820" height="820" rx="184" ry="184" fill="#FFFFFF" filter="url(#innerShadow)"/>
+  
+  <!-- Smooth organic blob (1.44x size) -->
+  <g transform="translate(512, 512) scale(1.44, 1.44)">
+    <path d="
+      M 0,-180
+      C 100,-180 180,-100 200,0
+      C 220,100 140,180 40,200
+      C -60,220 -160,180 -200,80
+      C -240,-20 -200,-120 -100,-160
+      C -50,-180 0,-180 0,-180
+      Z
+    " fill="url(#linearGradient)" filter="url(#shapeInnerShadow)" transform="rotate(15)"/>
+  </g>
+</svg>

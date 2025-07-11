@@ -1,0 +1,200 @@
+.input-area {
+  padding: 24px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  max-width: 720px;
+  width: 100%;
+  background-color: var(--input-bg-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 28px;
+  padding: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.input-container:focus-within {
+  border-color: var(--input-focus-border-color);
+}
+
+[data-theme='dark'] {
+  --input-bg-color: var(--md-sys-color-surface-container);
+  --input-border-color: var(--md-sys-color-outline-variant);
+  --input-focus-border-color: var(--md-sys-color-primary);
+  --input-text-color: var(--md-sys-color-on-surface);
+  --input-placeholder-color: var(--md-sys-color-on-surface-variant);
+  --input-icon-color: var(--md-sys-color-on-surface-variant);
+  --input-send-color: var(--md-sys-color-primary);
+}
+
+[data-theme='light'] {
+  --input-bg-color: #fff;
+  --input-border-color: var(--md-sys-color-outline);
+  --input-focus-border-color: var(--md-sys-color-primary);
+  --input-text-color: var(--md-sys-color-on-surface);
+  --input-placeholder-color: var(--md-sys-color-on-surface-variant);
+  --input-icon-color: var(--md-sys-color-on-surface-variant);
+  --input-send-color: var(--md-sys-color-primary);
+}
+
+.input-field-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.input-textarea {
+  width: 100%;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--input-text-color);
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: none;
+  max-height: 200px;
+  outline: none;
+}
+
+.input-textarea::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+.input-textarea:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.attach-button,
+.send-button {
+  --md-icon-button-icon-color: var(--input-icon-color);
+  --md-icon-button-icon-size: 20px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.attach-button-wrapper {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  color: var(--input-icon-color);
+  flex-shrink: 0;
+}
+
+.attach-button-wrapper:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.attach-button-wrapper:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.attach-button-wrapper md-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.attach-button:hover:not(:disabled),
+.send-button:hover:not(:disabled) {
+  --md-icon-button-hover-state-layer-color: var(--input-icon-color);
+  --md-icon-button-hover-state-layer-opacity: 0.08;
+}
+
+.send-button:not(:disabled) {
+  --md-icon-button-icon-color: var(--input-send-color);
+}
+
+.send-button:disabled,
+.attach-button:disabled {
+  opacity: 0.38;
+}
+
+.attached-files {
+  max-width: 720px;
+  width: 100%;
+}
+
+.file-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.file-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 12px;
+  background-color: var(--md-sys-color-surface-variant);
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 300px;
+  transition: background-color 0.2s ease;
+}
+
+.file-chip:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.file-chip-icon {
+  font-size: 18px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.file-chip-label {
+  color: var(--md-sys-color-on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.file-chip-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.file-chip-remove:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.file-chip-remove md-icon {
+  font-size: 18px;
+}
+
+/* Drag and drop styles */
+.input-area.drag-over {
+  background-color: var(--md-sys-color-surface-variant);
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
+}
+
+/* Hidden file input */
+.file-input-hidden {
+  display: none;
+}

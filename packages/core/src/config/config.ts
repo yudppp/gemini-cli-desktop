@@ -12,15 +12,7 @@ import {
   createContentGeneratorConfig,
 } from '../core/contentGenerator.js';
 import { ToolRegistry } from '../tools/tool-registry.js';
-import { LSTool } from '../tools/ls.js';
-import { ReadFileTool } from '../tools/read-file.js';
-import { GrepTool } from '../tools/grep.js';
-import { GlobTool } from '../tools/glob.js';
-import { EditTool } from '../tools/edit.js';
-import { ShellTool } from '../tools/shell.js';
-import { WriteFileTool } from '../tools/write-file.js';
 import { WebFetchTool } from '../tools/web-fetch.js';
-import { ReadManyFilesTool } from '../tools/read-many-files.js';
 import {
   MemoryTool,
   setGeminiMdFilename,
@@ -28,10 +20,7 @@ import {
 } from '../tools/memoryTool.js';
 import { WebSearchTool } from '../tools/web-search.js';
 import { GeminiClient } from '../core/client.js';
-import { FileDiscoveryService } from '../services/fileDiscoveryService.js';
-import { GitService } from '../services/gitService.js';
-import { loadServerHierarchicalMemory } from '../utils/memoryDiscovery.js';
-import { getProjectTempDir } from '../utils/paths.js';
+import { MemoryProvider, NoopMemoryProvider } from '../types/memoryProvider.js';
 import {
   initializeTelemetry,
   DEFAULT_TELEMETRY_TARGET,
@@ -42,6 +31,7 @@ import {
 import {
   DEFAULT_GEMINI_EMBEDDING_MODEL,
   DEFAULT_GEMINI_FLASH_MODEL,
+  DEFAULT_GEMINI_MODEL,
 } from './models.js';
 import { ClearcutLogger } from '../telemetry/clearcut-logger/clearcut-logger.js';
 
@@ -129,7 +119,7 @@ export interface ConfigParameters {
   checkpointing?: boolean;
   proxy?: string;
   cwd: string;
-  fileDiscoveryService?: FileDiscoveryService;
+  memoryProvider?: MemoryProvider;
   bugCommand?: BugCommandSettings;
   model: string;
   extensionContextFilePaths?: string[];
@@ -163,8 +153,7 @@ export class Config {
     respectGitIgnore: boolean;
     enableRecursiveFileSearch: boolean;
   };
-  private fileDiscoveryService: FileDiscoveryService | null = null;
-  private gitService: GitService | undefined = undefined;
+  private readonly memoryProvider: MemoryProvider;
   private readonly checkpointing: boolean;
   private readonly proxy: string | undefined;
   private readonly cwd: string;
@@ -210,7 +199,7 @@ export class Config {
     this.checkpointing = params.checkpointing ?? false;
     this.proxy = params.proxy;
     this.cwd = params.cwd ?? process.cwd();
-    this.fileDiscoveryService = params.fileDiscoveryService ?? null;
+    this.memoryProvider = params.memoryProvider ?? new NoopMemoryProvider();
     this.bugCommand = params.bugCommand;
     this.model = params.model;
     this.extensionContextFilePaths = params.extensionContextFilePaths ?? [];
@@ -233,15 +222,7 @@ export class Config {
   }
 
   async initialize(): Promise<void> {
-    // Initialize centralized FileDiscoveryService
-    this.getFileService();
-    if (this.getCheckpointingEnabled()) {
-      try {
-        await this.getGitService();
-      } catch {
-        // For now swallow the error, later log it.
-      }
-    }
+    // Git service has been removed
     this.toolRegistry = await this.createToolRegistry();
   }
 
@@ -301,10 +282,6 @@ export class Config {
   }
 
   getTargetDir(): string {
-    return this.targetDir;
-  }
-
-  getProjectRoot(): string {
     return this.targetDir;
   }
 
@@ -403,10 +380,6 @@ export class Config {
     return path.join(this.targetDir, GEMINI_DIR);
   }
 
-  getProjectTempDir(): string {
-    return getProjectTempDir(this.getProjectRoot());
-  }
-
   getEnableRecursiveFileSearch(): boolean {
     return this.fileFiltering.enableRecursiveFileSearch;
   }
@@ -431,13 +404,6 @@ export class Config {
     return this.bugCommand;
   }
 
-  getFileService(): FileDiscoveryService {
-    if (!this.fileDiscoveryService) {
-      this.fileDiscoveryService = new FileDiscoveryService(this.targetDir);
-    }
-    return this.fileDiscoveryService;
-  }
-
   getUsageStatisticsEnabled(): boolean {
     return this.usageStatisticsEnabled;
   }
@@ -446,20 +412,10 @@ export class Config {
     return this.extensionContextFilePaths;
   }
 
-  async getGitService(): Promise<GitService> {
-    if (!this.gitService) {
-      this.gitService = new GitService(this.targetDir);
-      await this.gitService.initialize();
-    }
-    return this.gitService;
-  }
-
   async refreshMemory(): Promise<{ memoryContent: string; fileCount: number }> {
-    const { memoryContent, fileCount } = await loadServerHierarchicalMemory(
+    const { memoryContent, fileCount } = await this.memoryProvider.loadMemory(
       this.getWorkingDir(),
       this.getDebugMode(),
-      this.getFileService(),
-      this.getExtensionContextFilePaths(),
     );
 
     this.setUserMemory(memoryContent);
@@ -470,7 +426,6 @@ export class Config {
 
   async createToolRegistry(): Promise<ToolRegistry> {
     const registry = new ToolRegistry(this);
-    const targetDir = this.getTargetDir();
 
     // helper to create & register core tools that are enabled
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -505,15 +460,7 @@ export class Config {
       }
     };
 
-    registerCoreTool(LSTool, targetDir, this);
-    registerCoreTool(ReadFileTool, targetDir, this);
-    registerCoreTool(GrepTool, targetDir);
-    registerCoreTool(GlobTool, targetDir, this);
-    registerCoreTool(EditTool, this);
-    registerCoreTool(WriteFileTool, this);
     registerCoreTool(WebFetchTool, this);
-    registerCoreTool(ReadManyFilesTool, targetDir, this);
-    registerCoreTool(ShellTool, this);
     registerCoreTool(MemoryTool);
     registerCoreTool(WebSearchTool, this);
 
@@ -522,4 +469,4 @@ export class Config {
   }
 }
 // Export model constants for use in CLI
-export { DEFAULT_GEMINI_FLASH_MODEL };
+export { DEFAULT_GEMINI_FLASH_MODEL, DEFAULT_GEMINI_MODEL };

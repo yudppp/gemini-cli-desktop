@@ -9,7 +9,6 @@ import tseslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettierConfig from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
 import globals from 'globals';
 import licenseHeader from 'eslint-plugin-license-header';
 import noRelativeCrossPackageImports from './eslint-rules/no-relative-cross-package-imports.js';
@@ -30,11 +29,10 @@ export default tseslint.config(
     ignores: [
       'node_modules/*',
       'eslint.config.js',
-      'packages/cli/dist/**',
       'packages/core/dist/**',
+      'packages/desktop/dist/**',
       'packages/server/dist/**',
       'eslint-rules/*',
-      'bundle/**',
     ],
   },
   eslint.configs.recommended,
@@ -48,24 +46,6 @@ export default tseslint.config(
       react: {
         version: 'detect',
       },
-    },
-  },
-  {
-    // Import specific config
-    files: ['packages/cli/src/**/*.{ts,tsx}'], // Target only TS/TSX in the cli package
-    plugins: {
-      import: importPlugin,
-    },
-    settings: {
-      'import/resolver': {
-        node: true,
-      },
-    },
-    rules: {
-      ...importPlugin.configs.recommended.rules,
-      ...importPlugin.configs.typescript.rules,
-      'import/no-default-export': 'warn',
-      'import/no-unresolved': 'off', // Disable for now, can be noisy with monorepos/paths
     },
   },
   {
@@ -143,7 +123,7 @@ export default tseslint.config(
     },
     rules: {
       'license-header/header': [
-        'error',
+        'warn',
         [
           '/**',
           ' * @license',
@@ -216,6 +196,67 @@ export default tseslint.config(
           root: path.join(projectRoot, 'packages'),
         },
       ],
+    },
+  },
+  {
+    // Disable no-explicit-any for .d.ts files
+    files: ['**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
+    files: [
+      'packages/core/cjs-wrapper.cjs',
+      'packages/desktop/bundle-core.js',
+      'packages/desktop/src/esm-loader.js',
+    ],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        module: 'readonly',
+        __dirname: 'readonly',
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+      'no-undef': 'off',
+    },
+  },
+  {
+    files: [
+      'packages/desktop/src/main.ts',
+      'packages/desktop/src/preload.ts',
+      'packages/desktop/src/main/**/*.ts',
+      'packages/desktop/src/services/**/*.ts',
+    ],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-restricted-syntax': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
+    files: ['packages/desktop/src/renderer/**/*.{ts,tsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.es2021,
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
+    files: ['packages/desktop/src/types/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 );

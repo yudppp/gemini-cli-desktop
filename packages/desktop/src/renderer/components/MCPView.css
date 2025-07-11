@@ -1,0 +1,292 @@
+.mcp-settings {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.settings-section {
+  background: var(--md-sys-color-surface-container);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.settings-title {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--md-sys-color-on-surface);
+}
+
+.settings-description {
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.mcp-settings md-divider {
+  margin: 24px 0;
+}
+
+.mcp-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.mcp-notice md-icon {
+  font-size: 20px;
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.mcp-notice p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.mcp-servers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 0;
+}
+
+.mcp-empty-state {
+  text-align: center;
+  padding: 32px 24px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 14px;
+}
+
+.mcp-server-item {
+  background-color: var(--md-sys-color-surface);
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.mcp-server-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.mcp-server-info {
+  flex: 1;
+}
+
+.mcp-server-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.mcp-server-command {
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0 0 4px 0;
+  font-family: monospace;
+}
+
+.mcp-server-env {
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0;
+  opacity: 0.8;
+}
+
+.mcp-server-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.mcp-server-header .mcp-server-actions {
+  margin-bottom: 0;
+}
+
+.mcp-toggle-button {
+  min-width: 80px;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 20px;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.mcp-toggle-button:hover:not([disabled]) {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.mcp-toggle-button md-icon {
+  font-size: 18px;
+}
+
+.mcp-toggle-button.enabled {
+  color: var(--md-sys-color-error);
+  border-color: var(--md-sys-color-error);
+}
+
+.mcp-toggle-button.enabled md-icon {
+  color: var(--md-sys-color-error);
+}
+
+.mcp-toggle-button.disabled {
+  color: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
+}
+
+.mcp-toggle-button.disabled md-icon {
+  color: var(--md-sys-color-primary);
+}
+
+.mcp-toggle-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mcp-server-actions md-icon-button {
+  --md-icon-button-icon-color: var(--md-sys-color-on-surface-variant);
+}
+
+.mcp-server-actions md-icon-button:hover {
+  --md-icon-button-hover-state-layer-color: var(--md-sys-color-error);
+  --md-icon-button-hover-state-layer-opacity: 0.08;
+}
+
+.mcp-add-button {
+  --md-text-button-label-text-color: var(--md-sys-color-primary);
+  --md-text-button-icon-color: var(--md-sys-color-primary);
+}
+
+.mcp-add-form {
+  background-color: var(--md-sys-color-surface);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.mcp-add-form h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.mcp-add-form md-outlined-text-field {
+  width: 100%;
+  --md-outlined-text-field-label-text-color: var(
+    --md-sys-color-on-surface-variant
+  );
+  --md-outlined-text-field-input-text-color: var(--md-sys-color-on-surface);
+  --md-outlined-text-field-outline-color: var(--md-sys-color-outline);
+  --md-outlined-text-field-hover-outline-color: var(--md-sys-color-on-surface);
+  --md-outlined-text-field-focus-outline-color: var(--md-sys-color-primary);
+}
+
+.mcp-add-form md-outlined-text-field:last-of-type {
+  --md-outlined-text-field-container-shape: 4px;
+}
+
+.mcp-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.mcp-form-actions md-text-button {
+  --md-text-button-label-text-color: var(--md-sys-color-on-surface-variant);
+}
+
+.mcp-form-actions md-filled-button {
+  --md-filled-button-container-color: var(--md-sys-color-primary);
+  --md-filled-button-label-text-color: var(--md-sys-color-on-primary);
+}
+
+/* Server status styles */
+.mcp-server-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-outline);
+}
+
+.status-indicator.disconnected {
+  background-color: var(--md-sys-color-outline);
+}
+
+.status-indicator.connecting {
+  background-color: var(--md-sys-color-tertiary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.status-indicator.connected {
+  background-color: var(--md-sys-color-primary);
+}
+
+.status-indicator.error {
+  background-color: var(--md-sys-color-error);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.status-text {
+  color: var(--md-sys-color-on-surface-variant);
+  text-transform: capitalize;
+}
+
+.tool-count {
+  color: var(--md-sys-color-primary);
+  font-weight: 500;
+}
+
+.error-text {
+  color: var(--md-sys-color-error);
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+}
+
+.mcp-server-actions md-circular-progress {
+  width: 36px;
+  height: 36px;
+  --md-circular-progress-active-indicator-color: var(--md-sys-color-primary);
+}

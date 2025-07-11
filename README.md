@@ -1,156 +1,151 @@
-# Gemini CLI
+# Gemini CLI Desktop
 
-[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)
+A desktop application that provides a graphical user interface for Google's Gemini AI, featuring MCP (Model Context Protocol) integration and tool approval system.
 
-![Gemini CLI Screenshot](./docs/assets/gemini-screenshot.png)
+![Gemini CLI Desktop](./docs/assets/gemini-cli-desktop-screenshot.png)
 
-This repository contains the Gemini CLI, a command-line AI workflow tool that connects to your
-tools, understands your code and accelerates your workflows.
+## Overview
 
-With the Gemini CLI you can:
+Gemini CLI Desktop is a fork and desktop GUI wrapper of [Google's Gemini CLI](https://github.com/google-gemini/gemini-cli). While the original Gemini CLI provides a powerful command-line interface for interacting with Gemini AI, this project extends it by:
 
-- Query and edit large codebases in and beyond Gemini's 1M token context window.
-- Generate new apps from PDFs or sketches, using Gemini's multimodal capabilities.
-- Automate operational tasks, like querying pull requests or handling complex rebases.
-- Use tools and MCP servers to connect new capabilities, including [media generation with Imagen,
-  Veo or Lyria](https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio/tree/main/experiments/mcp-genmedia)
-- Ground your queries with the [Google Search](https://ai.google.dev/gemini-api/docs/grounding)
-  tool, built in to Gemini.
+- Adding a native desktop application using Electron
+- Providing an intuitive graphical user interface with Material Design 3
+- Implementing a comprehensive tool approval system for enhanced security
+- Offering visual MCP server management
 
-## Quickstart
+This project maintains compatibility with the core Gemini CLI functionality while making it more accessible to users who prefer graphical interfaces over command-line tools.
 
-1. **Prerequisites:** Ensure you have [Node.js version 20](https://nodejs.org/en/download) or higher installed.
-2. **Run the CLI:** Execute the following command in your terminal:
+## Features
 
-   ```bash
-   npx https://github.com/google-gemini/gemini-cli
-   ```
+- **Chat Interface**: Clean, modern chat UI with support for:
+  - Conversation history
+  - Multiple chat sessions
+  - Real-time streaming responses
+  - Thought visualization (shows Gemini's reasoning process)
 
-   Or install it with:
+- **MCP Server Integration**: Easily manage and connect to MCP servers:
+  - Add/remove MCP servers with custom configurations
+  - Start/stop servers directly from the UI
+  - Support for environment variables and custom arguments
 
-   ```bash
-   npm install -g @google/gemini-cli
-   gemini
-   ```
+- **Tool Approval System**: Enhanced security with tool execution approval:
+  - Review and approve tool executions before they run
+  - Whitelist trusted tools for automatic execution
+  - Keyboard shortcuts for quick approval (Enter/Esc/Shift+Enter)
 
-3. **Pick a color theme**
-4. **Authenticate:** When prompted, sign in with your personal Google account. This will grant you up to 60 model requests per minute and 1,000 model requests per day using Gemini.
+- **Multiple Authentication Methods**:
+  - Google OAuth (personal accounts)
+  - Gemini API Key
+  - Vertex AI integration
 
-You are now ready to use the Gemini CLI!
+- **Material Design 3**: Modern UI following Google's Material Design guidelines
 
-### Use a Gemini API key:
+## Installation
 
-The Gemini API provides a free tier with [100 requests per day](https://ai.google.dev/gemini-api/docs/rate-limits#free-tier) using Gemini 2.5 Pro, control over which model you use, and access to higher rate limits (with a paid plan):
+### Prerequisites
 
-1. Generate a key from [Google AI Studio](https://aistudio.google.com/apikey).
-2. Set it as an environment variable in your terminal. Replace `YOUR_API_KEY` with your generated key.
+- Node.js 20 or higher
+- npm or yarn
 
-   ```bash
-   export GEMINI_API_KEY="YOUR_API_KEY"
-   ```
+### Build from Source
 
-3. (Optionally) Upgrade your Gemini API project to a paid plan on the API key page (will automatically unlock [Tier 1 rate limits](https://ai.google.dev/gemini-api/docs/rate-limits#tier-1))
+```bash
+# Clone the repository
+git clone https://github.com/yudppp/gemini-cli-desktop.git
+cd gemini-cli-desktop
 
-### Use a Vertex AI API key:
+# Install dependencies
+npm install
 
-The Vertex AI provides [free tier](https://cloud.google.com/vertex-ai/generative-ai/docs/start/express-mode/overview) using express mode for Gemini 2.5 Pro, control over which model you use, and access to higher rate limits with a billing account:
+# Start the application in development mode
+npm run dev:desktop
 
-1. Generate a key from [Google Cloud](https://cloud.google.com/vertex-ai/generative-ai/docs/start/api-keys).
-2. Set it as an environment variable in your terminal. Replace `YOUR_API_KEY` with your generated key and set GOOGLE_GENAI_USE_VERTEXAI to true
-
-   ```bash
-   export GOOGLE_API_KEY="YOUR_API_KEY"
-   export GOOGLE_GENAI_USE_VERTEXAI=true
-   ```
-
-3. (Optionally) Add a billing account on your project to get access to [higher usage limits](https://cloud.google.com/vertex-ai/generative-ai/docs/quotas)
-
-For other authentication methods, including Google Workspace accounts, see the [authentication](./docs/cli/authentication.md) guide.
-
-## Examples
-
-Once the CLI is running, you can start interacting with Gemini from your shell.
-
-You can start a project from a new directory:
-
-```sh
-cd new-project/
-gemini
-> Write me a Gemini Discord bot that answers questions using a FAQ.md file I will provide
+# Or build for production
+npm run build:desktop
 ```
 
-Or work with an existing project:
+## Usage
 
-```sh
-git clone https://github.com/google-gemini/gemini-cli
-cd gemini-cli
-gemini
-> Give me a summary of all of the changes that went in yesterday
+### First Run
+
+1. Launch the application
+2. Choose your authentication method:
+   - **OAuth**: Sign in with your Google account
+   - **API Key**: Enter your Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey)
+   - **Vertex AI**: Use Google Cloud credentials
+
+3. Start chatting with Gemini!
+
+### MCP Server Setup
+
+1. Navigate to Settings → MCP Servers
+2. Click "Add Server"
+3. Configure your MCP server:
+   - Name: Display name for the server
+   - Command: The command to run (e.g., `npx`)
+   - Arguments: Command arguments (e.g., `@modelcontextprotocol/server-filesystem`)
+   - Environment variables (optional)
+
+4. Click "Start" to connect to the server
+
+### Tool Approval
+
+All tools require approval before execution to ensure safety. When Gemini attempts to use a tool:
+
+1. An approval dialog will appear showing:
+   - Tool type and name
+   - What the tool will do
+   - For file edits: the changes to be made
+   - For commands: the command to be executed
+
+2. You can:
+   - **Execute (Enter)**: Run the tool once
+   - **Always Allow (Shift+Enter)**: Add to whitelist for automatic execution
+   - **Cancel (Esc)**: Deny the execution
+
+### Managing Approved Tools
+
+Navigate to Settings → Tool Approval to view and manage your whitelist of approved tools.
+
+## Configuration
+
+Configuration files are stored in:
+
+- **macOS**: `~/Library/Application Support/@gemini-cli-desktop/desktop/`
+- **Windows**: `%APPDATA%/@gemini-cli-desktop/desktop/`
+- **Linux**: `~/.config/@gemini-cli-desktop/desktop/`
+
+## Development
+
+### Project Structure
+
+```
+packages/
+├── desktop/          # Electron desktop application
+│   ├── src/
+│   │   ├── main/     # Main process (Electron)
+│   │   ├── renderer/ # Renderer process (React)
+│   │   └── services/ # Core services
+│   └── dist/         # Built application
+└── core/            # Gemini CLI core (submodule)
 ```
 
-### Next steps
+### Technologies Used
 
-- Learn how to [contribute to or build from the source](./CONTRIBUTING.md).
-- Explore the available **[CLI Commands](./docs/cli/commands.md)**.
-- If you encounter any issues, review the **[Troubleshooting guide](./docs/troubleshooting.md)**.
-- For more comprehensive documentation, see the [full documentation](./docs/index.md).
-- Take a look at some [popular tasks](#popular-tasks) for more inspiration.
+- **Electron**: Desktop application framework
+- **React**: UI framework
+- **TypeScript**: Type safety
+- **Material Web Components**: UI components
+- **Vite**: Build tool
 
-### Troubleshooting
+## Contributing
 
-Head over to the [troubleshooting](docs/troubleshooting.md) guide if you're
-having issues.
+Contributions are welcome! Please feel free to submit issues and pull requests.
 
-## Popular tasks
+## License
 
-### Explore a new codebase
+This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
 
-Start by `cd`ing into an existing or newly-cloned repository and running `gemini`.
+## Acknowledgments
 
-```text
-> Describe the main pieces of this system's architecture.
-```
-
-```text
-> What security mechanisms are in place?
-```
-
-### Work with your existing code
-
-```text
-> Implement a first draft for GitHub issue #123.
-```
-
-```text
-> Help me migrate this codebase to the latest version of Java. Start with a plan.
-```
-
-### Automate your workflows
-
-Use MCP servers to integrate your local system tools with your enterprise collaboration suite.
-
-```text
-> Make me a slide deck showing the git history from the last 7 days, grouped by feature and team member.
-```
-
-```text
-> Make a full-screen web app for a wall display to show our most interacted-with GitHub issues.
-```
-
-### Interact with your system
-
-```text
-> Convert all the images in this directory to png, and rename them to use dates from the exif data.
-```
-
-```text
-> Organize my PDF invoices by month of expenditure.
-```
-
-### Uninstall
-
-Head over to the [Uninstall](docs/Uninstall.md) guide for uninstallation instructions.
-
-## Terms of Service and Privacy Notice
-
-For details on the terms of service and privacy notice applicable to your use of Gemini CLI, see the [Terms of Service and Privacy Notice](./docs/tos-privacy.md).
+This project is built on top of [Google's Gemini CLI](https://github.com/google-gemini/gemini-cli) and uses the Model Context Protocol for tool integration.

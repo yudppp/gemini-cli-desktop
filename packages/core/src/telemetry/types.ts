@@ -25,8 +25,6 @@ export function getDecisionFromOutcome(
     case ToolConfirmationOutcome.ProceedAlwaysServer:
     case ToolConfirmationOutcome.ProceedAlwaysTool:
       return ToolCallDecision.ACCEPT;
-    case ToolConfirmationOutcome.ModifyWithEditor:
-      return ToolCallDecision.MODIFY;
     case ToolConfirmationOutcome.Cancel:
     default:
       return ToolCallDecision.REJECT;

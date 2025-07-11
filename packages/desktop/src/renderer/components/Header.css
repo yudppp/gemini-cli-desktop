@@ -1,0 +1,106 @@
+.header {
+  height: var(--header-height);
+  background-color: var(--header-bg-color);
+  border-bottom: 1px solid var(--header-border-color);
+  -webkit-app-region: drag;
+  position: relative;
+  z-index: 100;
+}
+
+[data-theme='dark'] {
+  --header-bg-color: var(--md-sys-color-surface);
+  --header-border-color: var(--md-sys-color-outline-variant);
+  --header-text-color: var(--md-sys-color-on-surface);
+  --header-icon-color: var(--md-sys-color-on-surface-variant);
+  --header-hover-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='light'] {
+  --header-bg-color: var(--md-sys-color-background);
+  --header-border-color: var(--md-sys-color-outline-variant);
+  --header-text-color: var(--md-sys-color-on-surface);
+  --header-icon-color: var(--md-sys-color-on-surface-variant);
+  --header-hover-color: rgba(66, 133, 244, 0.08);
+}
+
+.header-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  -webkit-app-region: no-drag;
+  z-index: 1;
+}
+
+/* macOS specific - space for traffic lights */
+.platform-darwin .header-content {
+  padding-left: 100px;
+}
+
+/* Ensure proper alignment on macOS */
+.platform-darwin .header {
+  padding-top: 8px;
+  height: calc(var(--header-height) + 8px);
+}
+
+.header-title {
+  margin: 0;
+  color: var(--header-text-color);
+  font-size: 20px;
+  font-weight: 400;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  -webkit-app-region: no-drag !important;
+  z-index: 1;
+  position: relative;
+}
+
+.header-actions md-icon-button {
+  -webkit-app-region: no-drag !important;
+}
+
+.menu-button {
+  -webkit-app-region: no-drag !important;
+  --md-icon-button-icon-color: var(--header-icon-color);
+  z-index: 1;
+  position: relative;
+}
+
+.menu-button:hover {
+  --md-icon-button-hover-state-layer-color: var(--header-icon-color);
+  --md-icon-button-hover-state-layer-opacity: 0.08;
+}
+
+.profile-button {
+  -webkit-app-region: no-drag !important;
+  --md-icon-button-icon-color: var(--header-icon-color);
+  --md-icon-button-icon-size: 32px;
+}
+
+.profile-button:hover {
+  --md-icon-button-hover-state-layer-color: var(--header-icon-color);
+  --md-icon-button-hover-state-layer-opacity: 0.08;
+}
+
+.theme-toggle {
+  -webkit-app-region: no-drag !important;
+  --md-icon-button-icon-color: var(--header-icon-color);
+}
+
+.theme-toggle:hover {
+  --md-icon-button-hover-state-layer-color: var(--header-icon-color);
+  --md-icon-button-hover-state-layer-opacity: 0.08;
+}

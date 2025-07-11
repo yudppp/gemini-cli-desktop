@@ -1,0 +1,124 @@
+.approval-settings {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.settings-section {
+  background: var(--md-sys-color-surface-container);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.settings-title {
+  margin: 0 0 24px 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--md-sys-color-on-surface);
+}
+
+.approval-info {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--md-sys-color-surface);
+  border-radius: 12px;
+}
+
+.approval-info p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+  line-height: 1.5;
+}
+
+.approval-settings md-divider {
+  margin: 24px 0;
+}
+
+.whitelist-section {
+  margin-top: 24px;
+}
+
+.whitelist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.whitelist-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+}
+
+.empty-whitelist {
+  padding: 48px;
+  text-align: center;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 14px;
+}
+
+.whitelist-section md-list {
+  background: var(--md-sys-color-surface);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.whitelist-section md-list-item {
+  --md-list-item-one-line-container-height: 56px;
+}
+
+.whitelist-section md-list-item md-icon {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.keyboard-shortcuts {
+  margin-top: 32px;
+  padding: 16px;
+  background: var(--md-sys-color-surface);
+  border-radius: 12px;
+}
+
+.keyboard-shortcuts h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.shortcut-item kbd {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--md-sys-color-surface-variant);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.shortcut-item span {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.shortcut-note {
+  margin: 16px 0 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .approval-info {
+  background: var(--md-sys-color-surface-container-high);
+}

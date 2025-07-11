@@ -13,7 +13,6 @@ import {
   ToolResult,
   ToolRegistry,
   ApprovalMode,
-  EditorType,
   Config,
   logToolCall,
   ToolCallEvent,
@@ -21,12 +20,6 @@ import {
 } from '../index.js';
 import { Part, PartListUnion } from '@google/genai';
 import { getResponseTextFromParts } from '../utils/generateContentResponseUtilities.js';
-import {
-  isModifiableTool,
-  ModifyContext,
-  modifyWithEditor,
-} from '../tools/modifiable-tool.js';
-import * as Diff from 'diff';
 
 export type ValidatingToolCall = {
   status: 'validating';
@@ -219,7 +212,7 @@ interface CoreToolSchedulerOptions {
   onAllToolCallsComplete?: AllToolCallsCompleteHandler;
   onToolCallsUpdate?: ToolCallsUpdateHandler;
   approvalMode?: ApprovalMode;
-  getPreferredEditor: () => EditorType | undefined;
+  getPreferredEditor: () => string | undefined;
   config: Config;
 }
 
@@ -230,7 +223,7 @@ export class CoreToolScheduler {
   private onAllToolCallsComplete?: AllToolCallsCompleteHandler;
   private onToolCallsUpdate?: ToolCallsUpdateHandler;
   private approvalMode: ApprovalMode;
-  private getPreferredEditor: () => EditorType | undefined;
+  private getPreferredEditor: () => string | undefined;
   private config: Config;
 
   constructor(options: CoreToolSchedulerOptions) {
@@ -522,35 +515,6 @@ export class CoreToolScheduler {
         'cancelled',
         'User did not allow tool call',
       );
-    } else if (outcome === ToolConfirmationOutcome.ModifyWithEditor) {
-      const waitingToolCall = toolCall as WaitingToolCall;
-      if (isModifiableTool(waitingToolCall.tool)) {
-        const modifyContext = waitingToolCall.tool.getModifyContext(signal);
-        const editorType = this.getPreferredEditor();
-        if (!editorType) {
-          return;
-        }
-
-        this.setStatusInternal(callId, 'awaiting_approval', {
-          ...waitingToolCall.confirmationDetails,
-          isModifying: true,
-        } as ToolCallConfirmationDetails);
-
-        const { updatedParams, updatedDiff } = await modifyWithEditor<
-          typeof waitingToolCall.request.args
-        >(
-          waitingToolCall.request.args,
-          modifyContext as ModifyContext<typeof waitingToolCall.request.args>,
-          editorType,
-          signal,
-        );
-        this.setArgsInternal(callId, updatedParams);
-        this.setStatusInternal(callId, 'awaiting_approval', {
-          ...waitingToolCall.confirmationDetails,
-          fileDiff: updatedDiff,
-          isModifying: false,
-        } as ToolCallConfirmationDetails);
-      }
     } else {
       // If the client provided new content, apply it before scheduling.
       if (payload?.newContent && toolCall) {
@@ -566,46 +530,16 @@ export class CoreToolScheduler {
   }
 
   /**
-   * Applies user-provided content changes to a tool call that is awaiting confirmation.
-   * This method updates the tool's arguments and refreshes the confirmation prompt with a new diff
-   * before the tool is scheduled for execution.
+   * @deprecated Modifiable tool functionality has been removed
    * @private
    */
   private async _applyInlineModify(
-    toolCall: WaitingToolCall,
-    payload: ToolConfirmationPayload,
-    signal: AbortSignal,
+    _toolCall: WaitingToolCall,
+    _payload: ToolConfirmationPayload,
+    _signal: AbortSignal,
   ): Promise<void> {
-    if (
-      toolCall.confirmationDetails.type !== 'edit' ||
-      !isModifiableTool(toolCall.tool)
-    ) {
-      return;
-    }
-
-    const modifyContext = toolCall.tool.getModifyContext(signal);
-    const currentContent = await modifyContext.getCurrentContent(
-      toolCall.request.args,
-    );
-
-    const updatedParams = modifyContext.createUpdatedParams(
-      currentContent,
-      payload.newContent,
-      toolCall.request.args,
-    );
-    const updatedDiff = Diff.createPatch(
-      modifyContext.getFilePath(toolCall.request.args),
-      currentContent,
-      payload.newContent,
-      'Current',
-      'Proposed',
-    );
-
-    this.setArgsInternal(toolCall.request.callId, updatedParams);
-    this.setStatusInternal(toolCall.request.callId, 'awaiting_approval', {
-      ...toolCall.confirmationDetails,
-      fileDiff: updatedDiff,
-    });
+    // Modifiable tool functionality has been removed
+    return;
   }
 
   private attemptExecutionOfScheduledCalls(signal: AbortSignal): void {

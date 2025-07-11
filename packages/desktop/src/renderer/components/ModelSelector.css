@@ -1,0 +1,218 @@
+.model-selector {
+  display: flex;
+  align-items: center;
+}
+
+.header-model-selector {
+  margin-left: 16px;
+}
+
+.model-selector-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.model-selector-label md-icon {
+  font-size: 18px;
+}
+
+.model-selector-dropdown {
+  position: relative;
+  z-index: 1001;
+}
+
+.model-selector-button {
+  padding: 4px 8px;
+  background-color: transparent;
+  color: var(--model-text-color);
+  border: 1px solid var(--model-border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  -webkit-app-region: no-drag;
+}
+
+[data-theme='dark'] {
+  --model-text-color: #fff;
+  --model-border-color: #4a5050;
+  --model-hover-bg: rgba(255, 255, 255, 0.08);
+  --model-hover-border: #5f6368;
+  --model-icon-color: #a2a9b0;
+  --model-menu-bg: #282a2c;
+  --model-menu-border: #4a5050;
+  --model-selected-bg: #004a77;
+  --model-selected-hover-bg: rgba(168, 199, 250, 0.16);
+}
+
+[data-theme='light'] {
+  --model-text-color: #202124;
+  --model-border-color: #c2d9f0;
+  --model-hover-bg: rgba(66, 133, 244, 0.08);
+  --model-hover-border: #a8c7fa;
+  --model-icon-color: #5f6368;
+  --model-menu-bg: #ffffff;
+  --model-menu-border: #c2d9f0;
+  --model-selected-bg: #c2e7ff;
+  --model-selected-hover-bg: #aed5ff;
+}
+
+.model-selector-button:hover:not(:disabled) {
+  background-color: var(--model-hover-bg);
+  border-color: var(--model-hover-border);
+}
+
+.model-selector-button:focus {
+  outline: none;
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+}
+
+.model-selector-button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.model-selector-button[aria-expanded='true'] {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+}
+
+.model-selector-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.model-name {
+  color: var(--model-text-color);
+  font-weight: 400;
+}
+
+.model-category {
+  color: var(--md-sys-color-on-surface-variant);
+  text-transform: capitalize;
+}
+
+.dropdown-icon {
+  font-size: 18px;
+  color: var(--model-icon-color);
+  transition: transform 0.2s ease;
+}
+
+.model-selector-button[aria-expanded='true'] .dropdown-icon {
+  color: var(--md-sys-color-primary);
+}
+
+.model-selector-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 200px;
+  background-color: var(--model-menu-bg);
+  border: 1px solid var(--model-menu-border);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  max-height: 400px;
+  overflow-y: auto;
+  animation: menu-enter 0.2s ease;
+}
+
+@keyframes menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.model-option {
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.model-option:hover {
+  background-color: var(--model-hover-bg);
+}
+
+.model-option:focus {
+  outline: none;
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.model-option.selected {
+  background-color: var(--model-selected-bg);
+}
+
+.model-option.selected:hover {
+  background-color: var(--model-selected-hover-bg);
+}
+
+.model-option-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.model-option-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.model-option-name {
+  color: var(--model-text-color);
+}
+
+.model-option-category {
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.model-option-category.category-experimental {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.model-option-category.category-stable {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.model-option-category.category-legacy {
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.model-option-description {
+  color: var(--model-icon-color);
+  font-size: 12px;
+}
+
+.check-icon {
+  font-size: 18px;
+  color: var(--md-sys-color-primary);
+  margin-left: 8px;
+}

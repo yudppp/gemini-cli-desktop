@@ -395,26 +395,7 @@ describe('UiTelemetryService', () => {
       });
     });
 
-    it('should process a ToolCallEvent with modify decision', () => {
-      const toolCall = createFakeCompletedToolCall(
-        'test_tool',
-        true,
-        250,
-        ToolConfirmationOutcome.ModifyWithEditor,
-      );
-      service.addEvent({
-        ...JSON.parse(JSON.stringify(new ToolCallEvent(toolCall))),
-        'event.name': EVENT_TOOL_CALL,
-      });
-
-      const metrics = service.getMetrics();
-      const { tools } = metrics;
-
-      expect(tools.totalDecisions[ToolCallDecision.MODIFY]).toBe(1);
-      expect(tools.byName['test_tool'].decisions[ToolCallDecision.MODIFY]).toBe(
-        1,
-      );
-    });
+    // Test for modify decision removed - ModifyWithEditor functionality is no longer supported
 
     it('should process a ToolCallEvent without a decision', () => {
       const toolCall = createFakeCompletedToolCall('test_tool', true, 100);

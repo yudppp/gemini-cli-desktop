@@ -196,30 +196,10 @@ export interface FileDiff {
   fileName: string;
 }
 
-export interface ToolEditConfirmationDetails {
-  type: 'edit';
-  title: string;
-  onConfirm: (
-    outcome: ToolConfirmationOutcome,
-    payload?: ToolConfirmationPayload,
-  ) => Promise<void>;
-  fileName: string;
-  fileDiff: string;
-  isModifying?: boolean;
-}
-
 export interface ToolConfirmationPayload {
   // used to override `modifiedProposedContent` for modifiable tools in the
   // inline modify flow
   newContent: string;
-}
-
-export interface ToolExecuteConfirmationDetails {
-  type: 'exec';
-  title: string;
-  onConfirm: (outcome: ToolConfirmationOutcome) => Promise<void>;
-  command: string;
-  rootCommand: string;
 }
 
 export interface ToolMcpConfirmationDetails {
@@ -240,8 +220,6 @@ export interface ToolInfoConfirmationDetails {
 }
 
 export type ToolCallConfirmationDetails =
-  | ToolEditConfirmationDetails
-  | ToolExecuteConfirmationDetails
   | ToolMcpConfirmationDetails
   | ToolInfoConfirmationDetails;
 
@@ -250,6 +228,5 @@ export enum ToolConfirmationOutcome {
   ProceedAlways = 'proceed_always',
   ProceedAlwaysServer = 'proceed_always_server',
   ProceedAlwaysTool = 'proceed_always_tool',
-  ModifyWithEditor = 'modify_with_editor',
   Cancel = 'cancel',
 }

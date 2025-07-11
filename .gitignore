@@ -6,6 +6,10 @@
 .gemini/
 !gemini/config.yaml
 
+# claude-code setting
+.claude/
+CLAUDE.local.md
+
 # Dependency directory
 node_modules
 bower_components

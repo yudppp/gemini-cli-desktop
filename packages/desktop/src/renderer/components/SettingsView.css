@@ -1,0 +1,54 @@
+.settings-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.settings-header {
+  padding: 24px 24px 0 24px;
+  flex-shrink: 0;
+}
+
+.settings-view-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--md-sys-color-on-surface);
+}
+
+.settings-tabs {
+  padding: 0 24px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.settings-tabs md-tabs {
+  margin-top: 16px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.settings-content {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding-top: 8px;
+}
+
+/* Remove default padding from embedded views */
+.settings-content .mcp-view {
+  padding-top: 0;
+}
+
+.settings-content .approval-settings {
+  padding-top: 0;
+}
+
+/* Adjust header elements in embedded views */
+.settings-content .mcp-view h2:first-child,
+.settings-content .approval-settings h3:first-child {
+  display: none;
+}

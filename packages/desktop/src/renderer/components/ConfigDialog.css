@@ -1,0 +1,123 @@
+.config-dialog-content {
+  width: 500px;
+  min-width: 500px;
+  max-width: 500px;
+}
+
+.config-section {
+  margin-bottom: 24px;
+}
+
+.config-section h3 {
+  margin: 0 0 16px 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.config-input {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.config-help {
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 8px 0 0 0;
+}
+
+.config-help a {
+  color: var(--md-sys-color-primary);
+  text-decoration: none;
+}
+
+.config-help a:hover {
+  text-decoration: underline;
+}
+
+md-dialog {
+  --md-dialog-container-color: var(--md-sys-color-surface-container-high);
+  --md-dialog-headline-color: var(--md-sys-color-on-surface);
+  --md-dialog-supporting-text-color: var(--md-sys-color-on-surface-variant);
+  --md-dialog-container-min-inline-size: 540px;
+  --md-dialog-container-max-inline-size: 540px;
+}
+
+md-dialog [slot='headline'] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+md-dialog [slot='headline'] md-icon {
+  font-size: 24px;
+}
+
+md-dialog [slot='actions'] {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.auth-method-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.auth-method-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.auth-method-option:hover {
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.auth-method-option md-radio {
+  flex-shrink: 0;
+}
+
+.auth-method-option > span:first-of-type {
+  flex: 0 0 auto;
+  min-width: 80px;
+}
+
+.auth-method-description {
+  flex: 1;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-left: 8px;
+}
+
+.auth-status {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border-radius: 8px;
+}
+
+.auth-button {
+  margin-top: 16px;
+}
+
+/* Native button styles to match Material Design */
+.md-text-button:hover {
+  background-color: rgba(var(--md-sys-color-primary-rgb), 0.08);
+}
+
+.md-text-button:active {
+  background-color: rgba(var(--md-sys-color-primary-rgb), 0.12);
+}
+
+.md-filled-button:hover:not(:disabled) {
+  box-shadow: var(--md-sys-elevation-1);
+  background-color: var(--md-sys-color-primary-container);
+}
+
+.md-filled-button:active:not(:disabled) {
+  box-shadow: none;
+}

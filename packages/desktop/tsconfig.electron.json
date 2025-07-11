@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2022",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "noEmit": false,
+    "composite": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/main.ts",
+    "src/preload.ts",
+    "src/services/**/*.ts",
+    "src/main/**/*.ts",
+    "src/types/**/*.ts"
+  ],
+  "exclude": ["src/renderer/**"]
+}
