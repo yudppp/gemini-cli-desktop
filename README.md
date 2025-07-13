@@ -4,6 +4,12 @@ A desktop application that provides a graphical user interface for Google's Gemi
 
 ![Gemini CLI Desktop](./docs/assets/gemini-cli-desktop-screenshot.png)
 
+## Disclaimer
+
+**This is an unofficial fork of Google's Gemini CLI. This project is not affiliated with, endorsed by, or sponsored by Google LLC. All Google trademarks are property of Google LLC.**
+
+If there are any concerns about this project, including its name, please open an issue and we will address them promptly.
+
 ## Overview
 
 Gemini CLI Desktop is a fork and desktop GUI wrapper of [Google's Gemini CLI](https://github.com/google-gemini/gemini-cli). While the original Gemini CLI provides a powerful command-line interface for interacting with Gemini AI, this project extends it by:
@@ -146,6 +152,10 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 
 This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
 
+Original Gemini CLI is also licensed under the Apache License 2.0 by Google LLC.
+
 ## Acknowledgments
 
-This project is built on top of [Google's Gemini CLI](https://github.com/google-gemini/gemini-cli) and uses the Model Context Protocol for tool integration.
+- This project is built on top of [Google's Gemini CLI](https://github.com/google-gemini/gemini-cli)
+- Uses the Model Context Protocol for tool integration
+- Google and Gemini are trademarks of Google LLC
